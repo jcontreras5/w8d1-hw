@@ -1,12 +1,17 @@
+//1.6 import Home
+import {Home} from './components'
+//1.9 import css
+import './styles.css'
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Home title='Soccer Roster' /> {/* //1.7 use Home within the ReactDOM below and pass in prop title */}
   </React.StrictMode>,
   document.getElementById('root')
 );
