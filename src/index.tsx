@@ -1,7 +1,11 @@
 //1.6 import Home
-import {Home} from './components'
+import {Home,Dashboard,SignIn} from './components'
 //1.9 import css
 import './styles.css'
+
+// Import From react-router-dom
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,7 +15,18 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home title='Soccer Roster' /> {/* //1.7 use Home within the ReactDOM below and pass in prop title */}
+    <Router>
+      <Switch>
+
+        <Route exact path='/'>
+          <Home title='Soccer Roster'/>
+        </Route>
+        {/* look like this because they dont require prop title like Home */}
+        <Route path='/dashboard' component={Dashboard}/> 
+        <Route path='/signin' component={SignIn}/>
+
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
