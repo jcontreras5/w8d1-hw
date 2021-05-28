@@ -6,6 +6,9 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import court from '../../assets/images/court.png';
 
+//2.8 import link from react-router-dom
+import {Link} from 'react-router-dom'
+
 
 //1.2 create functional comp:prop is child/attr of comp
 interface Props{
@@ -73,34 +76,39 @@ export const Home = ( props:Props) => {
 // 2.3 New classes variable code
 const classes = useStyles();//putting hook to use,acces to obj within func makeStyle
 
-    return (
+    return(
+        // 2.4{/* New and update HTML code */}
         <div className={classes.root}>
-            {/*New and Updated HTML Code */}
             <nav>
                 <div className={classes.navbar_container}>
-                    <h1 className={ `${classes.logo} `}>
-                        <a href="#" className={ `${classes.logo_a} ${classes.logo_navigation}` }>Brand</a>
+                    <h1 className={`${classes.logo}`}>
+
+                        {/* Changed all a tags to links , and changed href=to, and point them somewhere */}
+                        <Link to="/" className={`${classes.logo_a} ${classes.logo_navigation}`}>{props.title}</Link> 
                     </h1>
-                    <ul className={ `${classes.navigation} ${classes.logo_navigation}` }>
+                    <ul className={`${classes.navigation} ${classes.logo_navigation}`}>
                         <li>
-                            <a href="" className={classes.nav_a}>Home</a>
+                            <Link to="/" className={classes.nav_a}>Home</Link>
                         </li>
                         <li>
-                            <a href="" className={classes.nav_a}>About</a>
+                            <Link to="/dashboard" className={classes.nav_a}>About</Link>
                         </li>
                         <li>
-                            <a href="" className={classes.nav_a}>Learn More</a>
+                            <Link to="/signin" className={classes.nav_a}>Learn More</Link>
                         </li>
                     </ul>
                 </div>
             </nav>
             <main className={classes.main}>
                 <div className={classes.main_text}>
-                    <h1>{ props.title }</h1>
-                    <p>Soccer Roster</p>
-                    <Button color='primary' variant="contained">Click Me</Button>
+                    <h1>{props.title}</h1>
+                    <p>I like drones</p>
+                    <Link to='/dashboard'>
+                        {/* button from import|| styling  attributes from material ui */}
+                        <Button color='primary' variant='contained'>Click Me</Button> 
+                    </Link>
                 </div>
             </main>
         </div>
     )
-}
+    }
