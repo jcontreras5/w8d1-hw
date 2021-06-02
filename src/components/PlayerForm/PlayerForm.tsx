@@ -36,17 +36,15 @@ export const PlayerForm = (props:PlayerFormProps) => {
     const { register, handleSubmit } = useForm({ })
 
     const onSubmit = (data:any, event:any) => {
-        console.log(props.id)
-
-        if( props.id!){
+        
+        if(props.id!){
             server_calls.update(props.id!, data)
-            console.log(`Updated:${data} ${props.id}`)
-            window.location.reload()
-            event.target.reset();
+            console.log(`Updated: ${data} ${props.id}`)
+            
         } else {
             dispatch(chooseFirstName(data.name))
             server_calls.create(store.getState())
-            window.location.reload()
+        
         }
     }
 
