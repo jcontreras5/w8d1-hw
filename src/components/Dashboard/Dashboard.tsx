@@ -15,7 +15,12 @@ import { Drawer as MUIDrawer,
     IconButton,
     Typography,
     Divider,
-    Button
+    Button,
+    Dialog, // new item
+    DialogActions, // new item
+    DialogContent, // new item
+    DialogContentText, // new item
+    DialogTitle // new item
 } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu'
@@ -24,6 +29,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import clsx from 'clsx';
 import { RouteComponentProps, withRouter, Switch, Route } from "react-router-dom";
 import {DataTable} from '../../components'
+import { PlayerForm } from '../PlayerForm';
 
 //3.2 var for width 
 const drawerWidth = 100;
@@ -112,6 +118,16 @@ export const Dashboard = withRouter(( props:DashProps ) => {
     const classes = useStyles(); //using React's Hook syntax
     const theme = useTheme();//Creating a Material-UI Theme (default == no params)
     const [open, setOpen] = useState(false); //[var,function];useStatehook keeps track of state;currently open=false
+    const [dialogOpen, setDialogOpen] = useState(false);
+
+      // Handle Dialog Open/Close
+    const handleDialogClickOpen = () => {
+      setDialogOpen(true);
+    }
+
+    const handleDialogClickClose = () => {
+      setDialogOpen(false);
+    }
 
     const handleDrawerOpen = () => {//if used,sets open=true
         setOpen(true);
@@ -149,7 +165,21 @@ return (
             <MenuIcon />  {/* self closing tag */}
           </IconButton>
 
-          <Button className={classes.toolbar_button}>Create New Team Roster</Button>
+        <Button className={classes.toolbar_button} onClick={handleDialogClickOpen}>Create New Player</Button>
+
+                  {/*Dialog Pop Up begin */}
+                <Dialog open={dialogOpen} onClose={handleDialogClickClose} aria-labelledby="form-dialog-title">
+                  <DialogTitle id="form-dialog-title">Add New Player</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>Add A New Player</DialogContentText>
+                      <PlayerForm/>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick = {handleDialogClickClose} color="primary">Cancel</Button>
+                    <Button onClick={handleDialogClickClose} color = "primary">Done</Button> 
+                  </DialogActions>
+
+                </Dialog>        
         </Toolbar>
       </AppBar>
     {/* ----------drawer ------------- */}

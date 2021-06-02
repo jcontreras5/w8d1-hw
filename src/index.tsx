@@ -5,7 +5,9 @@ import './styles.css'
 
 // Import From react-router-dom
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
+//redux imports
+import { Provider } from 'react-redux';
+import { store } from './components/redux/store';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -15,18 +17,20 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
+    <Provider store = { store }> {/* Add this line */ }
+      <Router>
+        <Switch>
 
-        <Route exact path='/'>
-          <Home title='Soccer Roster'/>
-        </Route>
-        {/* look like this because they dont require prop title like Home */}
-        <Route path='/dashboard' component={Dashboard}/> 
-        <Route path='/signin' component={SignIn}/>
+          <Route exact path='/'>
+            <Home title='Soccer Roster'/>
+          </Route>
+          {/* look like this because they dont require prop title like Home */}
+          <Route path='/dashboard' component={Dashboard}/> 
+          <Route path='/signin' component={SignIn}/>
 
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </Provider> 
   </React.StrictMode>,
   document.getElementById('root')
 );
